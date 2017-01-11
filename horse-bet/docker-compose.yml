@@ -24,9 +24,20 @@ web:
         - ./tasks:/usr/src/app/tasks
         - ./gulpfile.js:/usr/src/app/gulpfile.js
         - ./Procfile:/usr/src/app/Procfile
+        - ./.truffle-solidity-loader:/usr/src/app/.truffle-solidity-loader
         - ./truffle.js:/usr/src/app/truffle.js
         - ./package.json:/usr/src/app/package.json
     command: "gulp serve"
     tty: false
     links:
         - "testrpc"
+command:
+    image: "codelab-ethereum"
+    volumes:
+        - ./:/usr/src/app
+    tty: true
+    stdin_open: true
+    entrypoint: /bin/sh
+    links:
+        - testrpc
+        - web

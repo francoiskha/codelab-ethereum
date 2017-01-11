@@ -2,15 +2,13 @@ testrpc:
     image: "codelab-ethereum"
     ports:
         - 8545:8545
-    expose:
-        - "8545"
     command: "testrpc -d"
+    tty: false
 truffle:
     image: "codelab-ethereum"
     command: "truffle test"
     volumes:
-        - ./:/app
-    working_dir: /app
+        - ./:/usr/src/app
     links:
         - "testrpc"
 web:
@@ -26,6 +24,9 @@ web:
         - ./tasks:/usr/src/app/tasks
         - ./gulpfile.js:/usr/src/app/gulpfile.js
         - ./Procfile:/usr/src/app/Procfile
+        - ./truffle.js:/usr/src/app/truffle.js
+        - ./package.json:/usr/src/app/package.json
     command: "gulp serve"
+    tty: false
     links:
         - "testrpc"

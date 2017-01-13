@@ -13,18 +13,19 @@ unit:
 web:
     image: "codelab-ethereum"
     ports:
-        - "9000"
-        - "35729"
+        - "9000:9000"
+        - "35729:35729"
     volumes:
         - ./:/usr/src/app
     command: "gulp serve"
     links:
         - "testrpc"
-command:
-    image: "codelab-ethereum"
-    volumes:
-        - ./:/usr/src/app
-    tty: true
-    links:
-        - "testrpc"
-    entrypoint: /bin/sh
+
+# command:
+#     image: "codelab-ethereum"
+#     volumes:
+#         - ./:/usr/src/app
+#     tty: true
+#     links:
+#         - "testrpc"
+#     entrypoint: /bin/sh

@@ -2,6 +2,8 @@ testrpc:
     image: "codelab-ethereum"
     expose:
         - "8545"
+    ports:
+        - "8545:8545"
     command: "testrpc -d"
 unit:
     image: "codelab-ethereum"

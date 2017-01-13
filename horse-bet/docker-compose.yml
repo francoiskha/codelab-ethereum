@@ -1,10 +1,9 @@
 testrpc:
     image: "codelab-ethereum"
-    ports:
-        - 8545:8545
+    expose:
+        - "8545"
     command: "testrpc -d"
-    tty: false
-truffle:
+unit:
     image: "codelab-ethereum"
     command: "truffle test"
     volumes:
@@ -14,22 +13,18 @@ truffle:
 web:
     image: "codelab-ethereum"
     ports:
-        - 9000:9000
-        - 35729:35729
+        - "9000"
+        - "35729"
     volumes:
         - ./:/usr/src/app
-    environment:
-        - ENV NPM_CONFIG_PREFIX=/usr/src/node_modules/lib/node_modules
     command: "gulp serve"
-    tty: false
     links:
         - "testrpc"
 command:
     image: "codelab-ethereum"
     volumes:
         - ./:/usr/src/app
-    environment:
-        - ENV NPM_CONFIG_PREFIX=/usr/src/node_modules/lib/node_modules
     tty: true
-    stdin_open: true
+    links:
+        - "testrpc"
     entrypoint: /bin/sh

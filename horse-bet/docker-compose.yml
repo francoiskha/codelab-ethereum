@@ -17,16 +17,9 @@ web:
         - 9000:9000
         - 35729:35729
     volumes:
-        - ./client:/usr/src/app/client
-        - ./contracts:/usr/src/app/contracts
-        - ./migrations:/usr/src/app/migrations
-        - ./server:/usr/src/app/server
-        - ./tasks:/usr/src/app/tasks
-        - ./gulpfile.js:/usr/src/app/gulpfile.js
-        - ./Procfile:/usr/src/app/Procfile
-        - ./.truffle-solidity-loader:/usr/src/app/.truffle-solidity-loader
-        - ./truffle.js:/usr/src/app/truffle.js
-        - ./package.json:/usr/src/app/package.json
+        - ./:/usr/src/app
+    environment:
+        - ENV NPM_CONFIG_PREFIX=/usr/src/node_modules/lib/node_modules
     command: "gulp serve"
     tty: false
     links:
@@ -35,9 +28,8 @@ command:
     image: "codelab-ethereum"
     volumes:
         - ./:/usr/src/app
+    environment:
+        - ENV NPM_CONFIG_PREFIX=/usr/src/node_modules/lib/node_modules
     tty: true
     stdin_open: true
     entrypoint: /bin/sh
-    links:
-        - testrpc
-        - web

@@ -19,10 +19,10 @@ web:
         - "35729:35729"
     volumes:
         - ./:/usr/src/app
-    command: "gulp serve"
+    command: "socat TCP-LISTEN:8545,fork,reuseaddr TCP:testrpc:8545 & gulp serve"
     links:
         - "testrpc"
-
+# debug container
 # command:
 #     image: "codelab-ethereum"
 #     volumes:

@@ -1,6 +1,6 @@
 module.exports = {
   networks: {
-    "development": {
+    "default": {
       network_id: "default",
       host: "testrpc", 
       port: 8545

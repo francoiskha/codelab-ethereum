@@ -95,4 +95,4 @@ Pour créer un contrat :
 ```
 ## Notes
 
-Le truffle-solidity-loader utilise une connexion à 127.0.0.1:8545, même lorsque l'on change [la conf du loader comme spécifié](https://github.com/ConsenSys/truffle-solidity-loader#installation) et/ou [la conf des networks dans truffle.js](http://truffleframework.com/docs/advanced/configuration). D'où l'utilisation inélégante d'un port forward TCP via `socat.
+Le truffle-solidity-loader utilise une connexion à 127.0.0.1:8545, même lorsque l'on change [la conf du loader comme spécifié](https://github.com/ConsenSys/truffle-solidity-loader#installation) et/ou [la conf des networks dans truffle.js](http://truffleframework.com/docs/advanced/configuration). D'où l'utilisation inélégante d'un port forward TCP via `socat`.

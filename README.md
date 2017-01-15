@@ -238,7 +238,7 @@ Vous aurez donc accès à l'interface spécifique du owner (création de course,
 
 Vous pouvez à tout moment changer d'utilisateur en faisant un switch account dans Metamask afin d'accèder, par la même url, à l'interface de pari et de récupération des gains.
 
-Pour changer de compte, affichez la fenêtre de metamask, cliquez sur *switch account* en haut à droite, cliquez sur l'icône *+* pour faire apparaître les comptes préconfigurés par le démon testrpc.
+Pour changer de compte, affichez la fenêtre de metamask, cliquez sur *Switch Accounts* en haut à droite, cliquez sur l'icône *+* pour faire apparaître les comptes préconfigurés par le daemon testrpc.
 
 ### Etape 4-1 : Intégration des smart-contrats à l'application
 

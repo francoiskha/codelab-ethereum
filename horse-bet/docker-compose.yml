@@ -19,15 +19,17 @@ web:
         - "35729:35729"
     volumes:
         - ./:/usr/src/app
-    command: "socat TCP-LISTEN:8545,fork,reuseaddr TCP:testrpc:8545 & gulp serve"
+    command: ["sh", "-c", "source ./serve.sh"]
     links:
         - "testrpc"
+
 # debug container
-# command:
-#     image: "codelab-ethereum"
-#     volumes:
-#         - ./:/usr/src/app
-#     tty: true
-#     links:
-#         - "testrpc"
-#     entrypoint: /bin/sh
+
+command:
+    image: "codelab-ethereum"
+    volumes:
+        - ./:/usr/src/app
+    tty: true
+    links:
+        - "testrpc"
+    entrypoint: /bin/sh

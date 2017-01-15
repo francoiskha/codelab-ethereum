@@ -79,6 +79,11 @@ here undefined
 Listening on port 9000
 ```
 
+# Debug
+
+Décommenter si besoin la conf du conteneur `command`, puis :
+`docker-compose run -p 9000:9000 -p 35729:35729 command`
+
 # Notes
 
 Le truffle-solidity-loader utilise une connexion à 127.0.0.1:8545, même lorsque l'ont change [la conf du loader comme spécifié](https://github.com/ConsenSys/truffle-solidity-loader#installation) et/ou [la conf des networks dans truffle.js](http://truffleframework.com/docs/advanced/configuration). D'où l'utilisation inélégante d'un port forward TCP via socat.

@@ -2,8 +2,11 @@
 
 ## Pré-requis
 Pour ce TP vous aurez besoin :
+
 1. D'un éditeur de texte ou un IDE. S'il prend en charge le javascript c'est mieux.
+
 2. D'une version récente de docker
+
 3. Google chrome et [l'extension metamask](https://metamask.io/) (il n'est malheureusement pas encore disponible pour Firefox)
 
 ## Installation
@@ -28,11 +31,11 @@ Lancez ensuite
 ```
 docker-compose logs -f web
 ```
-Vous devez obtenir un log sans erreur avec, à la fin, la mention `Listening on port 9000`. Si besoin, [une capture complète du lancement du projet est disponible ici](BUILD.md)
+Vous devez obtenir un log sans erreur avec, à la fin, la mention `Listening on port 9000`. Si besoin, [une capture complète du lancement du projet est disponible ici](horse-bet/BUILD.md)
 
 ## Plus de détails 
-Pour construire l'image docker de zéro reportez vous [à la page dédiée](BUILD.md) (ne le faites pas en séance !)
-Pour plus de détails sur l'architecture du projet, [consultez la page dédiée](OVERVIEW.md)
+Pour construire l'image docker de zéro reportez vous [à la page dédiée](horse-bet/BUILD.md) (ne le faites pas en séance !)
+Pour plus de détails sur l'architecture du projet, [consultez la page dédiée](horse-bet/OVERVIEW.md)
 
 ##Etape 1-1 : Le contrat - Création d'une course
 

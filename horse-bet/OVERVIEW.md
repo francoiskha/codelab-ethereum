@@ -30,6 +30,15 @@ Pour ce TP, vous allons utiliser  :
   - gestion des blockchains de déploiement (public et privée),
   - console interactive de communication avec les contrats ...
 
+3. Un gestionnair de portefeuille
+
+  Pour qu'une IHM de D-app fonctionne, elle doit être interfacée avec un portefeuille contenant les comptes et les clés privée des utilisateurs. Sans cet interfaçage avec le portefeuille, l'utilisateur ne peut pas signer ses transactions et donc, par extension, pas interagir avec une blockchain.
+
+  A l'heure actuelle, il y a deux solutions : *Metamask*, une extension chrome, qui permet d'ajouter un portefeuille ultra léger à Chrome (il ne télécharge pas de blockchain) et le navigateur dédie *Mist* qui se veut être l'appstore des D-apps.
+
+  Nous allons utiliser Metamask va permettre à une application web qui utilise la librairie js web3, de se connecter à un compte d'un portefeuille de n'importe quelle blockchain (rpc, privée, morden ou la principale).
+
+
 ## Arborescence du projet
 
 L'arborescence de notre projet est constituée de :

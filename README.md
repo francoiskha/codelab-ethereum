@@ -34,8 +34,27 @@ docker-compose logs -f web
 Vous devez obtenir un log sans erreur avec, à la fin, la mention `Listening on port 9000`. Si besoin, [une capture complète du lancement du projet est disponible ici](horse-bet/BUILD.md)
 
 ## Plus de détails 
-Pour construire l'image docker de zéro reportez vous [à la page dédiée](horse-bet/BUILD.md) (ne le faites pas en séance !)
+Pour construire l'image docker de zéro reportez vous [à la page dédiée](horse-bet/BUILD.md) (ne le faites pas en séance !).
+
 Pour plus de détails sur l'architecture du projet, [consultez la page dédiée](horse-bet/OVERVIEW.md)
+
+## Les commandes importantes :
+Lancer tous les conteneurs (à faire au début)
+```sh
+docker-compose up
+```
+Lancer les tests unitaires
+```sh
+docker-compose run unit
+```
+Consulter les logs de l'application web (option `-f` pour `tail`)
+```sh
+docker-compose logs web 
+```
+Redémarrer l'application web
+```sh
+docker-compose restart web 
+```
 
 ##Etape 1-1 : Le contrat - Création d'une course
 
@@ -62,10 +81,10 @@ https://ethereum.github.io/browser-solidity/
 
 Les tests unitaires se lancent, à la racine du répertoire horse-bet par le biais de la commande :
 
-     truffle test
-
-
-Depuis le répertoire `horse-bet`, lancer les tests en faisant : `docker run -it --rm -v $(pwd):/app -w /app zenika/truffle-with-testrpc truffle test`
+```sh
+docker-compose run unit
+```
+Depuis le répertoire `horse-bet`.
 
 *Pour le debug*, c'est compliqué et rien n'est fourni de base.
 
@@ -194,29 +213,20 @@ Cela fournit une IHM Angular de base en ES6, servie par un serveur koa, avec liv
 
 #### Lancement de l'IHM
 
-        npm install (si pas déjà fait)
-        npm install gulp-cli -g
-        npm install gulp -D (si pas déjà fait)
-        gulp serve
+```sh
+docker-compose start web
+```
 
-Cela lance une url [localhost:9000](http://localhost:9000/) dans votre navigateur web favori.
-Mais *ouvrez la plutôt avec Chrome* car nous aurons besoin du plugin Metamask.
+Consultez [http://localhost:9000](http://localhost:9000/) dans votre google chrome.
 
-Cliquer sur l'icone du plugin Metamask en haut à droite de votre fenêtre (un renard orangé).
+Cliquer sur l'icone de l'extension chrome Metamask en haut à droite de votre fenêtre (un renard orangé). 
 
-Pour qu'une IHM de D-app fonctionne, elle doit être interfacée avec un portefeuille contenant les comptes et les clés privée des utilisateurs. Sans cet interfaçage avec le portefeuille, l'utilisateur ne peut pas signer ses transactions et donc, par extension, pas interagir avec une blockchain.
+Pour pouvoir interfacer l'extension chrome Metamask avec votre blockchain RPC, il faut le configurer.
 
-A l'heure actuelle, il y a deux solutions : *Metamask* qui permet d'ajouter un portefeuille ultra léger à Chrome (il ne télécharge pas de blockchain) et le navigateur dédie *Mist* qui se veut être l'appstore des D-apps.
-
-Le plugin Metamask va permettre à une application web qui utilise la librairie js web3, de se connecter à un compte d'un portefeuille de n'importe quelle blockchain (rpc,
-privée, morden ou la principale).
-
-Pour pouvoir interfacer le plugin Metamask avec votre blockchain RPC, il faut le configurer.
-
-Sur l'écran de connexion (écran disponible de base ou accessible via Menu Lock puis Back), choisir l'option 'Restore existing Vault'.
+Sur l'écran de connexion (écran disponible de base ou accessible via Menu Lock puis Back), choisir l'option *Restore existing Vault*.
 Il vous sera demandé douze mots clés permettant de récupérer votre portefeuille ainsi qu'un nouveau mot de passe.
 
-Pour se connecter au testrpc local, rentrer les deux mots clés fournis au lancement de testrpc dans la partie Mnemonic :
+Pour se connecter au démon simulant une blockchain (testrpc), il rentrer les deux mots clés fournis au lancement de testrpc dans la partie Mnemonic (comme c'est un outil de test, ce sont toujours les mêmes) :
 
      HD Wallet
      ==================
@@ -228,7 +238,7 @@ Vous aurez donc accès à l'interface spécifique du owner (création de course,
 
 Vous pouvez à tout moment changer d'utilisateur en faisant un switch account dans Metamask afin d'accèder, par la même url, à l'interface de pari et de récupération des gains.
 
-
+Pour changer de compte, affichez la fenêtre de metamask, cliquez sur *switch account* en haut à droite, cliquez sur l'icône *+* pour faire apparaître les comptes préconfigurés par le démon testrpc.
 
 ### Etape 4-1 : Intégration des smart-contrats à l'application
 
@@ -241,20 +251,12 @@ Les endroits à modifier sont là encore marqués par des FIX_ME.
 Cette branche est une version de l'application sans lien avec Ethereum.
 C'est comme si on démarrait du project starter Angular2 (https://github.com/blacksonic/angular2-babel-esnext-starter), avec les quelques ajouts suivants :
 - j'ai ajouté les répertoires *contracts* (nos fichiers .sol) et *migrations* (les scripts de déploiement Truffle) à la racine du projet.
-- ainsi que les deux fichiers truffle.js et truffle-config.js pour que la configuration truffle soit prise en compte.
+- ainsi que les le fichier truffle.js pour que la configuration truffle soit prise en compte.
 
 A partir de là, pour pouvoir utiliser nos smarts contracts dans l'application, la configuration est assez simple.
 
 Tout d'abord, ajouter un loader webpack spécifique à Truffle *truffle-solidity-loader*.
 Ce loader va automatiquement rendre disponible vos ABI Javascript (fichier .sol.js) dans le fichier vendor.js aggrégant toutes les sources Js de l'appli.
-
-Pour cela, ajouter la ligne suivante dans les dépendances de votre package.json :
-
-      ...
-      "truffle-solidity-loader": "0.0.8",
-      ...
-
-Et faire un npm install
 
 Puis modifier le fichier `tasks/config/webpack.js` en y référençant notre nouveau loader qui prendra en charge les fichiers .sol :
 ```

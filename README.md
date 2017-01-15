@@ -18,6 +18,18 @@ docker pull francoiskha/codelab-ethereum
 ```
 Installez [l'extension chrome metamask](https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn)
 
+Vérifiez que tout fonctionne via en lançant depuis la racine du projet :
+```sh
+docker-compose up -d
+docker-compose logs -f unit
+```
+Vous devez obtenir à la fin du log la mention `3 passing`
+Lancez ensuite 
+```
+docker-compose logs -f web
+```
+Vous devez obtenir un log sans erreur avec, à la fin, la mention `Listening on port 9000`. Si besoin, [une capture complète du lancement du projet est disponible ici](BUILD.md)
+
 ## Plus de détails 
 Pour construire l'image docker de zéro reportez vous [à la page dédiée](BUILD.md) (ne le faites pas en séance !)
 Pour plus de détails sur l'architecture du projet, [consultez la page dédiée](OVERVIEW.md)
